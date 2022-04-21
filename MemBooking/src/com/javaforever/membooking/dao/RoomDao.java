@@ -1,8 +1,8 @@
 package com.javaforever.membooking.dao;
 
-import com.javaforever.membooking.domain.Room;
-import java.sql.Connection;
 import java.util.List;
+
+import com.javaforever.membooking.domain.Room;
 
 public interface RoomDao{
 	public List<Room> listAllRooms() throws Exception;

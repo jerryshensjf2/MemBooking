@@ -7,6 +7,27 @@ import com.javaforever.membooking.dao.GuestDao;
 import com.javaforever.membooking.domain.Guest;
 
 public class GuestDaoImpl implements GuestDao{
+	public static List<Guest> db = new CopyOnWriteArrayList<>();
+	
+	static {
+		Guest guest0 = new Guest();
+		guest0.setId(1L);
+		guest0.setGuestName("jerry");
+		guest0.setGender("Male");
+		guest0.setActive(true);
+		guest0.setDescription("");
+		
+		Guest guest1 = new Guest();
+		guest1.setId(1L);
+		guest1.setGuestName("mala");
+		guest1.setGender("Female");
+		guest1.setActive(true);
+		guest1.setDescription("");
+		
+		db.add(guest0);
+		db.add(guest1);
+	}
+	
 	public void activateAllGuests(String ids) throws Exception{
 		String [] idArr = ids.split(",");
 		for (String idString : idArr){
@@ -39,7 +60,7 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public Long countSearchGuestsByFieldsRecords(Guest guest){
-		return 2L;
+		return Long.valueOf(db.size());
 	}
 
 	public void deleteAllGuests(String ids) throws Exception{
@@ -78,26 +99,8 @@ public class GuestDaoImpl implements GuestDao{
 		try {
 		Long start = (pagenum-1)*pagesize;
 		Long limit = pagesize;
-		CopyOnWriteArrayList<Guest> list = new CopyOnWriteArrayList<>();
-		
-		Guest guest0 = new Guest();
-		guest0.setId(1L);
-		guest0.setGuestName("jerry");
-		guest0.setGender("Male");
-		guest0.setActive(true);
-		guest0.setDescription("");
-		
-		Guest guest1 = new Guest();
-		guest1.setId(1L);
-		guest1.setGuestName("mala");
-		guest1.setGender("Female");
-		guest1.setActive(true);
-		guest1.setDescription("");
-		
-		list.add(guest0);
-		list.add(guest1);
 
-		return list;
+		return db;
 		} catch (Exception e){
 			e.printStackTrace();
 			return null;

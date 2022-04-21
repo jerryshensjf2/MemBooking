@@ -1,11 +1,32 @@
 package com.javaforever.membooking.daoimpl;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.javaforever.membooking.dao.RoomDao;
 import com.javaforever.membooking.domain.Room;
 
 public class RoomDaoImpl implements RoomDao{
+	public static List<Room> db = new CopyOnWriteArrayList<>();
+	
+	static {
+		Room room0 = new Room();
+		room0.setId(1L);
+		room0.setRoomNo("1");
+		room0.setRoomName("New York");
+		room0.setActive(true);
+		room0.setDescription("");
+		
+		Room room1 = new Room();
+		room1.setId(2L);
+		room1.setRoomNo("2");
+		room1.setRoomName("London");
+		room1.setActive(true);
+		room1.setDescription("");
+	
+		db.add(room0);
+		db.add(room1);
+	}
 
 	@Override
 	public List<Room> listAllRooms() throws Exception {
@@ -87,8 +108,7 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public List<Room> searchRoomsByFieldsByPage(Room room, Long pagenum, Long pagesize) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override
@@ -123,8 +143,7 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public Long countSearchRoomsByFieldsRecords(Room room) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return Long.valueOf(db.size());
 	}
 
 }

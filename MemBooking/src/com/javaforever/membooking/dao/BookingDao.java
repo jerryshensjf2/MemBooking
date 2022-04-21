@@ -1,8 +1,8 @@
 package com.javaforever.membooking.dao;
 
-import com.javaforever.membooking.domain.Booking;
-import java.sql.Connection;
 import java.util.List;
+
+import com.javaforever.membooking.domain.Booking;
 
 public interface BookingDao{
 	public List<Booking> listAllBookings() throws Exception;
