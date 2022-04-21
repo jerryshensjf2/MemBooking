@@ -1,153 +1,109 @@
 package com.javaforever.membooking.serviceimpl;
 
-import java.sql.Connection;
 import java.util.List;
 
 import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.daoimpl.BookingDaoImpl;
-import com.javaforever.membooking.database.DBConf;
 import com.javaforever.membooking.domain.Booking;
 import com.javaforever.membooking.service.BookingService;
 
 public class BookingServiceImpl implements BookingService{
 	protected BookingDao dao = new BookingDaoImpl();
-	public void activateAllBookings(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.activateAllBookings(connection,ids);
-		}
+	public void activateAllBookings(String ids) throws Exception{		
+			dao.activateAllBookings(ids);
 	}
 
-	public boolean activateBooking(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.activateBooking(connection,id);
-		}
+	public boolean activateBooking(Long id) throws Exception{		
+			return dao.activateBooking(id);
 	}
 
-	public boolean addBooking(Booking booking) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.addBooking(connection,booking);
-		}
+	public boolean addBooking(Booking booking) throws Exception{		
+			return dao.addBooking(booking);
 	}
 
 	@Override
-	public Long countActiveBookingRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countActiveBookingRecords(connection);
-		}
+	public Long countActiveBookingRecords() throws Exception{		
+			return dao.countActiveBookingRecords();
 	}
 
 	@Override
-	public Long countAllBookingRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countAllBookingRecords(connection);
-		}
+	public Long countAllBookingRecords() throws Exception{		
+			return dao.countAllBookingRecords();
 	}
 
-	public int countBookingsPage(int pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countBookingsPage(connection,pagesize);
-		}
+	public int countBookingsPage(int pagesize) throws Exception{		
+			return dao.countBookingsPage(pagesize);
 	}
 
 	@Override
-	public Long countSearchBookingsByFieldsRecords(Booking booking) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countSearchBookingsByFieldsRecords(connection,booking);
-		}
+	public Long countSearchBookingsByFieldsRecords(Booking booking) throws Exception{		
+			return dao.countSearchBookingsByFieldsRecords(booking);
 	}
 
-	public void deleteAllBookings(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.deleteAllBookings(connection,ids);
-		}
+	public void deleteAllBookings(String ids) throws Exception{		
+			dao.deleteAllBookings(ids);
 	}
 
-	public boolean deleteBooking(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.deleteBooking(connection,id);
-		}
+	public boolean deleteBooking(Long id) throws Exception{		
+			return dao.deleteBooking(id);
 	}
 
 	public Booking findBookingByBookingName(String bookingName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findBookingByBookingName(connection,bookingName);
-		}
+			return dao.findBookingByBookingName(bookingName);
 	}
 
 	public Booking findBookingById(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findBookingById(connection,id);
-		}
+			return dao.findBookingById(id);
 	}
 
-	public List<Booking> listActiveBookings() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listActiveBookings(connection);
-		}
+	public List<Booking> listActiveBookings() throws Exception{		
+			return dao.listActiveBookings();
 	}
 
-	public List<Booking> listAllBookings() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllBookings(connection);
-		}
+	public List<Booking> listAllBookings() throws Exception{		
+			return dao.listAllBookings();
 	}
 
-	public List<Booking> listAllBookingsByPage(int pagesize,int pagenum) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllBookingsByPage(connection,pagesize,pagenum);
-		}
+	public List<Booking> listAllBookingsByPage(int pagesize,int pagenum) throws Exception{		
+			return dao.listAllBookingsByPage(pagesize,pagenum);
 	}
 
-	public List<Booking> searchBookingsByBookingName(String bookingName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchBookingsByBookingName(connection,bookingName);
-		}
+	public List<Booking> searchBookingsByBookingName(String bookingName) throws Exception{		
+			return dao.searchBookingsByBookingName(bookingName);
 	}
 
 	public List<Booking> searchBookingsByFieldsByPage(Booking booking,Long pagenum,Long pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchBookingsByFieldsByPage(connection,booking,pagenum,pagesize);
-		}
+			return dao.searchBookingsByFieldsByPage(booking,pagenum,pagesize);
 	}
 
-	public void softDeleteAllBookings(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.softDeleteAllBookings(connection,ids);
-		}
+	public void softDeleteAllBookings(String ids) throws Exception{		
+			dao.softDeleteAllBookings(ids);
 	}
 
-	public boolean softDeleteBooking(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.softDeleteBooking(connection,id);
-		}
+	public boolean softDeleteBooking(Long id) throws Exception{		
+			return dao.softDeleteBooking(id);
 	}
 
-	public Boolean toggleBooking(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.toggleBooking(connection,id);
-		}
+	public Boolean toggleBooking(Long id) throws Exception{		
+			return dao.toggleBooking(id);
 	}
 
-	public Boolean toggleOneBooking(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			Booking booking = dao.findBookingById(connection,id);
+	public Boolean toggleOneBooking(Long id) throws Exception{		
+			Booking booking = dao.findBookingById(id);
 			if (booking.getActive()==false) {
-				dao.toggleBooking(connection,id);
+				dao.toggleBooking(id);
 			}
 			else {
-				Long count = dao.countActiveBookingRecords(connection);
+				Long count = dao.countActiveBookingRecords();
 				if (count > 1){
-					dao.toggleBooking(connection,id);
+					dao.toggleBooking(id);
 				}
 			}
 			return true;
-		}
 	}
 
-	public boolean updateBooking(Booking booking) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.updateBooking(connection,booking);
-		}
+	public boolean updateBooking(Booking booking) throws Exception{		
+			return dao.updateBooking(booking);
 	}
 
 }
