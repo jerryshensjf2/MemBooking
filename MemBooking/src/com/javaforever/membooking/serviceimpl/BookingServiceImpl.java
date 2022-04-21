@@ -1,12 +1,13 @@
 package com.javaforever.membooking.serviceimpl;
 
+import java.sql.Connection;
+import java.util.List;
+
 import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.daoimpl.BookingDaoImpl;
 import com.javaforever.membooking.database.DBConf;
 import com.javaforever.membooking.domain.Booking;
 import com.javaforever.membooking.service.BookingService;
-import java.sql.Connection;
-import java.util.List;
 
 public class BookingServiceImpl implements BookingService{
 	protected BookingDao dao = new BookingDaoImpl();
