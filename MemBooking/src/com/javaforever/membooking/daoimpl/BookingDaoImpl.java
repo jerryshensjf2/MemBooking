@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingDaoImpl implements BookingDao{
-	public void activateAllBookings(Connection connection,String ids) throws Exception{
+	public void activateAllBookings(String ids) throws Exception{
 		String [] idArr = ids.split(",");
 		for (String idString : idArr){
 			Long id = Long.valueOf(idString);
@@ -14,9 +14,9 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public boolean activateBooking(Connection connection,Long id) throws Exception{
+	public boolean activateBooking(Long id) throws Exception{
 		String query = "update mb_bookings set active = true where id = ? ;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ps.setLong(1,id);
 		int result = ps.executeUpdate();
 		if (result > 0) {
@@ -25,7 +25,7 @@ public class BookingDaoImpl implements BookingDao{
 		return false;
 	}
 
-	public boolean addBooking(Connection connection,Booking booking) throws Exception{
+	public boolean addBooking(Booking booking) throws Exception{
 		String query = "insert into mb_bookings ( active,booking_name,description,occu_date,room_id) values (?,?,?,?,?);";
 		PreparedStatement ps = connection.prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
 		ps.setBoolean(1,booking.getActive());
@@ -45,9 +45,9 @@ public class BookingDaoImpl implements BookingDao{
 		return false;
 	}
 
-	public Long countActiveBookingRecords(Connection connection) throws Exception{
+	public Long countActiveBookingRecords() throws Exception{
 		String query = "select count(id) as countNum from mb_bookings where active = true;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ResultSet result = ps.executeQuery();
 		Long recordcount = 0L;
 		while(result.next()) {
@@ -56,9 +56,9 @@ public class BookingDaoImpl implements BookingDao{
 		return recordcount;
 	}
 
-	public Long countAllBookingRecords(Connection connection) throws Exception{
+	public Long countAllBookingRecords() throws Exception{
 		String query = "select count(id) as countNum from mb_bookings;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ResultSet result = ps.executeQuery();
 		Long recordcount = 0L;
 		while(result.next()) {
@@ -67,12 +67,12 @@ public class BookingDaoImpl implements BookingDao{
 		return recordcount;
 	}
 
-	public int countBookingsPage(Connection connection,int pagesize) throws Exception{
+	public int countBookingsPage(int pagesize) throws Exception{
 		try {
 			int pagecount = 1;
 			double recordcount = 0;
 			String query = "select count(id) as countNum from mb_bookings;";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ResultSet result = ps.executeQuery();
 			while(result.next()) {
 				recordcount = result.getDouble("countNum");
@@ -86,7 +86,7 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public Long countSearchBookingsByFieldsRecords(Connection connection,Booking booking){
+	public Long countSearchBookingsByFieldsRecords(Booking booking){
 		try {
 		String query = " select count(*) countSum from mb_bookings where 1=1 ";
 		if (booking.getActive()!=null ){
@@ -108,7 +108,7 @@ public class BookingDaoImpl implements BookingDao{
 		//System.out.println("JerryDebug:query:"+query);
 		
 		int serial = 1;
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		
 		if (booking.getActive()!=null ){
 			ps.setBoolean(serial++,booking.getActive());
@@ -138,7 +138,7 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public void deleteAllBookings(Connection connection,String ids) throws Exception{
+	public void deleteAllBookings(String ids) throws Exception{
 		String [] idArr = ids.split(",");
 		for (String idString : idArr){
 			Long id = Long.valueOf(idString);
@@ -146,9 +146,9 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public boolean deleteBooking(Connection connection,Long id) throws Exception{
+	public boolean deleteBooking(Long id) throws Exception{
 		String query = "delete from mb_bookings where id = ?;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ps.setLong(1,id);
 		int result = ps.executeUpdate();
 		if (result > 0) {
@@ -157,10 +157,10 @@ public class BookingDaoImpl implements BookingDao{
 		return false;
 	}
 
-	public Booking findBookingByBookingName(Connection connection,String bookingName) throws Exception{
+	public Booking findBookingByBookingName(String bookingName) throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings where booking_name = ?;";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ps.setString(1,bookingName);
 			ResultSet result = ps.executeQuery();
 			Booking booking = new Booking();
@@ -179,10 +179,10 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public Booking findBookingById(Connection connection,Long id) throws Exception{
+	public Booking findBookingById(Long id) throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings where id = ?;";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ps.setLong(1,id);
 			ResultSet result = ps.executeQuery();
 			Booking booking = new Booking();
@@ -201,10 +201,10 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public List<Booking> listActiveBookings(Connection connection) throws Exception{
+	public List<Booking> listActiveBookings() throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings where active = true;";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ResultSet result = ps.executeQuery();
 			ArrayList<Booking> list = new ArrayList<Booking>();
 			while(result.next()) {
@@ -226,10 +226,10 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public List<Booking> listAllBookings(Connection connection) throws Exception{
+	public List<Booking> listAllBookings() throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings;";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ResultSet result = ps.executeQuery();
 			ArrayList<Booking> list = new ArrayList<Booking>();
 			while(result.next()) {
@@ -251,12 +251,12 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public List<Booking> listAllBookingsByPage(Connection connection,int pagesize,int pagenum) throws Exception{
+	public List<Booking> listAllBookingsByPage(int pagesize,int pagenum) throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings limit ?,?;";
 			int limitstart = (pagenum-1)*pagesize;
 			int limitcount = pagesize;
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			int pagecount = this.countBookingsPage(connection,pagesize);
 			if (pagenum <= 1) pagenum = 1;
 			if (pagenum >= pagecount) pagenum = pagecount;
@@ -283,10 +283,10 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public List<Booking> searchBookingsByBookingName(Connection connection,String bookingName) throws Exception{
+	public List<Booking> searchBookingsByBookingName(String bookingName) throws Exception{
 		try {
 			String query = "select room_id,occu_date,description,booking_name,active,id from mb_bookings where booking_name like ?";
-			PreparedStatement ps = connection.prepareStatement(query);
+			
 			ps.setString(1,"%"+bookingName+"%");
 			ResultSet result = ps.executeQuery();
 			ArrayList<Booking> list = new ArrayList<Booking>();
@@ -309,7 +309,7 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public List<Booking> searchBookingsByFieldsByPage(Connection connection,Booking booking,Long pagenum,Long pagesize) throws Exception{
+	public List<Booking> searchBookingsByFieldsByPage(Booking booking,Long pagenum,Long pagesize) throws Exception{
 		try {
 		Long start = (pagenum-1)*pagesize;
 		Long limit = pagesize;
@@ -333,7 +333,7 @@ public class BookingDaoImpl implements BookingDao{
 		//System.out.println("JerryDebug:query:"+query);
 		
 		Integer serial = 1;
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		
 		if (booking.getActive()!=null ){
 			ps.setBoolean(serial++,booking.getActive());
@@ -374,7 +374,7 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public void softDeleteAllBookings(Connection connection,String ids) throws Exception{
+	public void softDeleteAllBookings(String ids) throws Exception{
 		String [] idArr = ids.split(",");
 		for (String idString : idArr){
 			Long id = Long.valueOf(idString);
@@ -382,9 +382,9 @@ public class BookingDaoImpl implements BookingDao{
 		}
 	}
 
-	public boolean softDeleteBooking(Connection connection,Long id) throws Exception{
+	public boolean softDeleteBooking(Long id) throws Exception{
 		String query = "update mb_bookings set active = false where id = ? ;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ps.setLong(1,id);
 		int result = ps.executeUpdate();
 		if (result > 0) {
@@ -393,9 +393,9 @@ public class BookingDaoImpl implements BookingDao{
 		return false;
 	}
 
-	public Boolean toggleBooking(Connection connection,Long id) throws Exception{
+	public Boolean toggleBooking(Long id) throws Exception{
 		String query = "update mb_bookings set active = not active where id = ? ";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ps.setLong(1,id);
 		int result = ps.executeUpdate();
 		if (result > 0) {
@@ -404,9 +404,9 @@ public class BookingDaoImpl implements BookingDao{
 		return false;
 	}
 
-	public boolean updateBooking(Connection connection,Booking booking) throws Exception{
+	public boolean updateBooking(Booking booking) throws Exception{
 		String query = "update mb_bookings set room_id = ? ,occu_date = ? ,description = ? ,booking_name = ? ,active = ? where id = ?;";
-		PreparedStatement ps = connection.prepareStatement(query);
+		
 		ps.setBoolean(1,booking.getActive());
 		ps.setString(2,booking.getBookingName());
 		ps.setString(3,booking.getDescription());
