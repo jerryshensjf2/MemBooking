@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.javaforever.membooking.dao.RoomDao;
+import com.javaforever.membooking.domain.Guest;
 import com.javaforever.membooking.domain.Room;
 
 public class RoomDaoImpl implements RoomDao{
@@ -42,14 +43,21 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public boolean deleteRoom(Long id) throws Exception {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==id){
+                db.remove(i);
+                return true;
+            }
+        }
 		return false;
 	}
 
 	@Override
 	public boolean addRoom(Room room) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		Long index = nextIndex();
+		room.setId(index);
+		db.add(room);
+		return true;
 	}
 
 	@Override
@@ -144,6 +152,14 @@ public class RoomDaoImpl implements RoomDao{
 	@Override
 	public Long countSearchRoomsByFieldsRecords(Room room) throws Exception {
 		return Long.valueOf(db.size());
+	}
+	
+	private Long nextIndex(){
+		Long index = 0L;
+		for (Room r:db){
+			if (r.getId()>index) index = r.getId();
+		}
+		return index +1L;
 	}
 
 }

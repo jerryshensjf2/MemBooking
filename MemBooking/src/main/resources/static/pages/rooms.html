@@ -331,17 +331,18 @@ function addRoom(){
 		$.ajax({
 			type: "post",
 			url: "../facade/addRoomFacade",
-			data: JSON.stringify({
-				roomName:$("#ff").find("#roomName").val(),
+			data:{
 				active:parseBoolean($("#ff").find("input[name='active']:checked").val()),
-				roomNo:$("#ff").find("#roomNo").val(),
 				description:$("#ff").find("#description").val(),
-			}),
-			dataType: 'json',
-			contentType:"application/json;charset=UTF-8",
+				roomName:$("#ff").find("#roomName").val(),
+				roomNo:$("#ff").find("#roomNo").val(),
+			},
 			success: function(data, textStatus) {
 				if (data.success) {
-					window.location.reload();
+					$('#ff').form('clear');
+					$("#ff").find("input[name='active']").get(0).checked = true;
+					$("#waddRoom").window('close');
+					$("#dg").datagrid("load");
 				}
 				},
 			complete : function(XMLHttpRequest, textStatus) {
