@@ -1,152 +1,110 @@
 package com.javaforever.membooking.serviceimpl;
 
-import com.javaforever.membooking.dao.RoomDao;
-import com.javaforever.membooking.daoimpl.RoomDaoImpl;
-import com.javaforever.membooking.database.DBConf;
-import com.javaforever.membooking.domain.Room;
-import com.javaforever.membooking.service.RoomService;
-import java.sql.Connection;
 import java.util.List;
 
-public class RoomServiceImpl implements RoomService{
+import com.javaforever.membooking.dao.RoomDao;
+import com.javaforever.membooking.daoimpl.RoomDaoImpl;
+import com.javaforever.membooking.domain.Room;
+import com.javaforever.membooking.service.RoomService;
+
+public class RoomServiceImpl implements RoomService {
 	protected RoomDao dao = new RoomDaoImpl();
-	public void activateAllRooms(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.activateAllRooms(connection,ids);
-		}
+
+	public void activateAllRooms(String ids) throws Exception {
+		dao.activateAllRooms(ids);
 	}
 
-	public boolean activateRoom(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.activateRoom(connection,id);
-		}
+	public boolean activateRoom(Long id) throws Exception {
+		return dao.activateRoom(id);
 	}
 
-	public boolean addRoom(Room room) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.addRoom(connection,room);
-		}
+	public boolean addRoom(Room room) throws Exception {
+		return dao.addRoom(room);
 	}
 
 	@Override
-	public Long countActiveRoomRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countActiveRoomRecords(connection);
-		}
+	public Long countActiveRoomRecords() throws Exception {
+		return dao.countActiveRoomRecords();
 	}
 
 	@Override
-	public Long countAllRoomRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countAllRoomRecords(connection);
-		}
+	public Long countAllRoomRecords() throws Exception {
+		return dao.countAllRoomRecords();
 	}
 
-	public int countRoomsPage(int pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countRoomsPage(connection,pagesize);
-		}
+	public int countRoomsPage(int pagesize) throws Exception {
+		return dao.countRoomsPage(pagesize);
 	}
 
 	@Override
-	public Long countSearchRoomsByFieldsRecords(Room room) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countSearchRoomsByFieldsRecords(connection,room);
-		}
+	public Long countSearchRoomsByFieldsRecords(Room room) throws Exception {
+		return dao.countSearchRoomsByFieldsRecords(room);
 	}
 
-	public void deleteAllRooms(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.deleteAllRooms(connection,ids);
-		}
+	public void deleteAllRooms(String ids) throws Exception {
+		dao.deleteAllRooms(ids);
 	}
 
-	public boolean deleteRoom(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.deleteRoom(connection,id);
-		}
+	public boolean deleteRoom(Long id) throws Exception {
+		return dao.deleteRoom(id);
 	}
 
-	public Room findRoomById(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findRoomById(connection,id);
-		}
+	public Room findRoomById(Long id) throws Exception {
+		return dao.findRoomById(id);
 	}
 
-	public Room findRoomByRoomName(String roomName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findRoomByRoomName(connection,roomName);
-		}
+	public Room findRoomByRoomName(String roomName) throws Exception {
+		return dao.findRoomByRoomName(roomName);
 	}
 
-	public List<Room> listActiveRooms() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listActiveRooms(connection);
-		}
+	public List<Room> listActiveRooms() throws Exception {
+		return dao.listActiveRooms();
 	}
 
-	public List<Room> listAllRooms() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllRooms(connection);
-		}
+	public List<Room> listAllRooms() throws Exception {
+		return dao.listAllRooms();
 	}
 
-	public List<Room> listAllRoomsByPage(int pagesize,int pagenum) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllRoomsByPage(connection,pagesize,pagenum);
-		}
+	public List<Room> listAllRoomsByPage(int pagesize, int pagenum) throws Exception {
+		return dao.listAllRoomsByPage(pagesize, pagenum);
 	}
 
-	public List<Room> searchRoomsByFieldsByPage(Room room,Long pagenum,Long pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchRoomsByFieldsByPage(connection,room,pagenum,pagesize);
-		}
+	public List<Room> searchRoomsByFieldsByPage(Room room, Long pagenum, Long pagesize) throws Exception {
+		return dao.searchRoomsByFieldsByPage(room, pagenum, pagesize);
 	}
 
-	public List<Room> searchRoomsByRoomName(String roomName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchRoomsByRoomName(connection,roomName);
-		}
+	public List<Room> searchRoomsByRoomName(String roomName) throws Exception {
+		return dao.searchRoomsByRoomName(roomName);
 	}
 
-	public void softDeleteAllRooms(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.softDeleteAllRooms(connection,ids);
-		}
+	public void softDeleteAllRooms(String ids) throws Exception {
+		dao.softDeleteAllRooms(ids);
 	}
 
-	public boolean softDeleteRoom(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.softDeleteRoom(connection,id);
-		}
+	public boolean softDeleteRoom(Long id) throws Exception {
+		return dao.softDeleteRoom(id);
 	}
 
-	public Boolean toggleOneRoom(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			Room room = dao.findRoomById(connection,id);
-			if (room.getActive()==false) {
-				dao.toggleRoom(connection,id);
+	public Boolean toggleOneRoom(Long id) throws Exception {
+		Room room = dao.findRoomById(id);
+		if (room.getActive() == false) {
+			dao.toggleRoom(id);
+		} else {
+			Long count = dao.countActiveRoomRecords();
+			if (count > 1) {
+				dao.toggleRoom(id);
 			}
-			else {
-				Long count = dao.countActiveRoomRecords(connection);
-				if (count > 1){
-					dao.toggleRoom(connection,id);
-				}
-			}
-			return true;
 		}
+		return true;
+
 	}
 
-	public Boolean toggleRoom(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.toggleRoom(connection,id);
-		}
+	public Boolean toggleRoom(Long id) throws Exception {
+		return dao.toggleRoom(id);
 	}
 
-	public boolean updateRoom(Room room) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.updateRoom(connection,room);
-		}
+	public boolean updateRoom(Room room) throws Exception {
+		return dao.updateRoom(room);
 	}
 
 }

@@ -2,151 +2,125 @@ package com.javaforever.membooking.serviceimpl;
 
 import com.javaforever.membooking.dao.GuestDao;
 import com.javaforever.membooking.daoimpl.GuestDaoImpl;
-import com.javaforever.membooking.database.DBConf;
 import com.javaforever.membooking.domain.Guest;
 import com.javaforever.membooking.service.GuestService;
-import java.sql.Connection;
 import java.util.List;
 
-public class GuestServiceImpl implements GuestService{
+public class GuestServiceImpl implements GuestService {
 	protected GuestDao dao = new GuestDaoImpl();
-	public void activateAllGuests(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.activateAllGuests(connection,ids);
-		}
-	}
 
-	public boolean activateGuest(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.activateGuest(connection,id);
-		}
-	}
-
-	public boolean addGuest(Guest guest) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.addGuest(connection,guest);
-		}
+	@Override
+	public void activateAllGuests(String ids) throws Exception {
+		dao.activateAllGuests(ids);
 	}
 
 	@Override
-	public Long countActiveGuestRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countActiveGuestRecords(connection);
-		}
+	public boolean activateGuest(Long id) throws Exception {
+		return dao.activateGuest(id);
 	}
 
 	@Override
-	public Long countAllGuestRecords() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countAllGuestRecords(connection);
-		}
-	}
-
-	public int countGuestsPage(int pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countGuestsPage(connection,pagesize);
-		}
+	public boolean addGuest(Guest guest) throws Exception {
+		return dao.addGuest(guest);
 	}
 
 	@Override
-	public Long countSearchGuestsByFieldsRecords(Guest guest) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.countSearchGuestsByFieldsRecords(connection,guest);
-		}
+	public Long countActiveGuestRecords() throws Exception {
+		return dao.countActiveGuestRecords();
 	}
 
-	public void deleteAllGuests(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.deleteAllGuests(connection,ids);
-		}
+	@Override
+	public Long countAllGuestRecords() throws Exception {
+		return dao.countAllGuestRecords();
 	}
 
-	public boolean deleteGuest(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.deleteGuest(connection,id);
-		}
+	@Override
+	public int countGuestsPage(int pagesize) throws Exception {
+		return dao.countGuestsPage(pagesize);
 	}
 
-	public Guest findGuestByGuestName(String guestName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findGuestByGuestName(connection,guestName);
-		}
+	@Override
+	public Long countSearchGuestsByFieldsRecords(Guest guest) throws Exception {
+		return dao.countSearchGuestsByFieldsRecords(guest);
 	}
 
-	public Guest findGuestById(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.findGuestById(connection,id);
-		}
+	@Override
+	public void deleteAllGuests(String ids) throws Exception {
+		dao.deleteAllGuests(ids);
 	}
 
-	public List<Guest> listActiveGuests() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listActiveGuests(connection);
-		}
+	@Override
+	public boolean deleteGuest(Long id) throws Exception {
+		return dao.deleteGuest(id);
 	}
 
-	public List<Guest> listAllGuests() throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllGuests(connection);
-		}
+	@Override
+	public Guest findGuestByGuestName(String guestName) throws Exception {
+		return dao.findGuestByGuestName(guestName);
 	}
 
-	public List<Guest> listAllGuestsByPage(int pagesize,int pagenum) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.listAllGuestsByPage(connection,pagesize,pagenum);
-		}
+	@Override
+	public Guest findGuestById(Long id) throws Exception {
+		return dao.findGuestById(id);
 	}
 
-	public List<Guest> searchGuestsByFieldsByPage(Guest guest,Long pagenum,Long pagesize) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchGuestsByFieldsByPage(connection,guest,pagenum,pagesize);
-		}
+	@Override
+	public List<Guest> listActiveGuests() throws Exception {
+		return dao.listActiveGuests();
 	}
 
-	public List<Guest> searchGuestsByGuestName(String guestName) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.searchGuestsByGuestName(connection,guestName);
-		}
+	@Override
+	public List<Guest> listAllGuests() throws Exception {
+		return dao.listAllGuests();
 	}
 
-	public void softDeleteAllGuests(String ids) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			dao.softDeleteAllGuests(connection,ids);
-		}
+	@Override
+	public List<Guest> listAllGuestsByPage(int pagesize, int pagenum) throws Exception {
+		return dao.listAllGuestsByPage(pagesize, pagenum);
 	}
 
-	public boolean softDeleteGuest(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.softDeleteGuest(connection,id);
-		}
+	@Override
+	public List<Guest> searchGuestsByFieldsByPage(Guest guest, Long pagenum, Long pagesize) throws Exception {
+		return dao.searchGuestsByFieldsByPage(guest, pagenum, pagesize);
 	}
 
-	public Boolean toggleGuest(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.toggleGuest(connection,id);
-		}
+	@Override
+	public List<Guest> searchGuestsByGuestName(String guestName) throws Exception {
+		return dao.searchGuestsByGuestName(guestName);
 	}
 
-	public Boolean toggleOneGuest(Long id) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			Guest guest = dao.findGuestById(connection,id);
-			if (guest.getActive()==false) {
-				dao.toggleGuest(connection,id);
+	@Override
+	public void softDeleteAllGuests(String ids) throws Exception {
+		dao.softDeleteAllGuests(ids);
+	}
+
+	@Override
+	public boolean softDeleteGuest(Long id) throws Exception {
+		return dao.softDeleteGuest(id);
+	}
+
+	@Override
+	public Boolean toggleGuest(Long id) throws Exception {
+		return dao.toggleGuest(id);
+	}
+
+	@Override
+	public Boolean toggleOneGuest(Long id) throws Exception {
+		Guest guest = dao.findGuestById(id);
+		if (guest.getActive() == false) {
+			dao.toggleGuest(id);
+		} else {
+			Long count = dao.countActiveGuestRecords();
+			if (count > 1) {
+				dao.toggleGuest(id);
 			}
-			else {
-				Long count = dao.countActiveGuestRecords(connection);
-				if (count > 1){
-					dao.toggleGuest(connection,id);
-				}
-			}
-			return true;
 		}
+		return true;
 	}
 
-	public boolean updateGuest(Guest guest) throws Exception{
-		try (Connection connection = DBConf.initDB()) {
-			return dao.updateGuest(connection,guest);
-		}
+	@Override
+	public boolean updateGuest(Guest guest) throws Exception {
+		return dao.updateGuest(guest);
 	}
 
 }
