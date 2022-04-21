@@ -98,8 +98,11 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public void deleteAllRooms(String ids) throws Exception {
-		// TODO Auto-generated method stub
-		
+		String [] idArr = ids.split(",");
+		for (String idString : idArr){
+			Long id = Long.valueOf(idString);
+			deleteRoom(id);
+		}
 	}
 
 	@Override
