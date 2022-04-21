@@ -18,7 +18,7 @@ public class GuestDaoImpl implements GuestDao{
 		guest0.setDescription("");
 		
 		Guest guest1 = new Guest();
-		guest1.setId(1L);
+		guest1.setId(2L);
 		guest1.setGuestName("mala");
 		guest1.setGender("Female");
 		guest1.setActive(true);
@@ -41,7 +41,10 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public boolean addGuest(Guest guest) throws Exception{
-		return false;
+		Long index = nextIndex();
+		guest.setId(index);
+		db.add(guest);
+		return true;
 	}
 
 	public Long countActiveGuestRecords() throws Exception{
@@ -72,6 +75,12 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public boolean deleteGuest(Long id) throws Exception{
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==id){
+                db.remove(i);
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -80,6 +89,9 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public Guest findGuestById(Long id) throws Exception{
+		for (Guest g:db) {
+			if (g.getId() == id) return g;
+		}
 		return null;
 	}
 
@@ -131,4 +143,11 @@ public class GuestDaoImpl implements GuestDao{
 		return false;
 	}
 
+	private Long nextIndex(){
+		Long index = 0L;
+		for (Guest g:db){
+			if (g.getId()>index) index = g.getId();
+		}
+		return index +1L;
+	}
 }

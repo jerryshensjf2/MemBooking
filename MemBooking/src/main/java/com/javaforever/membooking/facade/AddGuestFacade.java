@@ -8,11 +8,13 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
+@WebServlet(name = "addGuestFacade",urlPatterns = "/facade/addGuestFacade")
 public class AddGuestFacade extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{

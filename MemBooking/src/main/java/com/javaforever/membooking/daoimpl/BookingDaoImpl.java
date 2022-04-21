@@ -1,5 +1,6 @@
 package com.javaforever.membooking.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -7,7 +8,7 @@ import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.domain.Booking;
 
 public class BookingDaoImpl implements BookingDao{
-	public static List<Booking> db = new CopyOnWriteArrayList<>();
+	public static List<Booking> db = new ArrayList<>();
 	
 	public void activateAllBookings(String ids) throws Exception{
 		String [] idArr = ids.split(",");

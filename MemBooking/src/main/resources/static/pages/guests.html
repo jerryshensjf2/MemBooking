@@ -331,17 +331,18 @@ function addGuest(){
 		$.ajax({
 			type: "post",
 			url: "../facade/addGuestFacade",
-			data: JSON.stringify({
-				guestName:$("#ff").find("#guestName").val(),
+			data:{
 				active:parseBoolean($("#ff").find("input[name='active']:checked").val()),
-				gender:$("#ff").find("#gender").val(),
 				description:$("#ff").find("#description").val(),
-			}),
-			dataType: 'json',
-			contentType:"application/json;charset=UTF-8",
+				gender:$("#ff").find("#gender").val(),
+				guestName:$("#ff").find("#guestName").val(),
+			},
 			success: function(data, textStatus) {
 				if (data.success) {
-					window.location.reload();
+					$('#ff').form('clear');
+					$("#ff").find("input[name='active']").get(0).checked = true;
+					$("#waddGuest").window('close');
+					$("#dg").datagrid("load");
 				}
 				},
 			complete : function(XMLHttpRequest, textStatus) {
