@@ -50,7 +50,7 @@ public class SearchBookingsByFieldsByPageFacade extends HttpServlet{
 			booking.setActive(active);
 			booking.setBookingName(bookingName);
 			booking.setDescription(description);
-			booking.setOccuDate(occuDate);
+			//booking.setOccuDate(occuDate);
 			//booking.setRoomId(roomId);
 			BookingService service = new BookingServiceImpl();
 			Long recordCount = service.countSearchBookingsByFieldsRecords(booking);

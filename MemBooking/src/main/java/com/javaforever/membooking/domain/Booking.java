@@ -1,10 +1,11 @@
 package com.javaforever.membooking.domain;
 
+import java.util.Date;
 
 public class Booking  {
 	protected Long roomId;
 	protected Long guestId;
-	protected String occuDate;
+	protected Date occuDate;
 	protected String description;
 	protected String bookingName;
 	protected Boolean active;
@@ -24,10 +25,6 @@ public class Booking  {
 
 	public Long getId(){
 		return this.id;
-	}
-
-	public String getOccuDate(){
-		return this.occuDate;
 	}
 
 	public Long getRoomId(){
@@ -50,10 +47,6 @@ public class Booking  {
 		this.id = id;
 	}
 
-	public void setOccuDate(String occuDate){
-		this.occuDate = occuDate;
-	}
-
 	public void setRoomId(Long roomId){
 		this.roomId = roomId;
 	}
@@ -64,6 +57,14 @@ public class Booking  {
 
 	public void setGuestId(Long guestId) {
 		this.guestId = guestId;
+	}
+
+	public Date getOccuDate() {
+		return occuDate;
+	}
+
+	public void setOccuDate(Date occuDate) {
+		this.occuDate = occuDate;
 	}
 
 }

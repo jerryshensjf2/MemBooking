@@ -5,6 +5,7 @@ import com.javaforever.membooking.service.BookingService;
 import com.javaforever.membooking.serviceimpl.BookingServiceImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.servlet.ServletException;
@@ -33,8 +34,9 @@ public class UpdateBookingFacade extends HttpServlet{
 		Map<String,Object> result = new TreeMap<String,Object>();
 		try {
 			Booking booking = new Booking();
-			booking.setRoomId(null);
-			booking.setOccuDate(request.getParameter("occuDate"));
+			booking.setRoomId(Long.valueOf(request.getParameter("roomId")));
+			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
+			booking.setOccuDate(sdf.parse(request.getParameter("occuDate")));
 			booking.setDescription(request.getParameter("description"));
 			booking.setBookingName(request.getParameter("bookingName"));
 			booking.setActive(Boolean.parseBoolean(request.getParameter("active")));

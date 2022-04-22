@@ -1,17 +1,21 @@
 package com.javaforever.membooking.facade;
 
-import com.javaforever.membooking.domain.Booking;
-import com.javaforever.membooking.service.BookingService;
-import com.javaforever.membooking.serviceimpl.BookingServiceImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javaforever.membooking.domain.Booking;
+import com.javaforever.membooking.service.BookingService;
+import com.javaforever.membooking.serviceimpl.BookingServiceImpl;
+
 import net.sf.json.JSONObject;
 
 @WebServlet(name = "addBookingFacade",urlPatterns = "/facade/addBookingFacade")
@@ -38,7 +42,8 @@ public class AddBookingFacade extends HttpServlet{
 			booking.setActive(Boolean.parseBoolean(request.getParameter("active")));
 			booking.setBookingName(request.getParameter("bookingName"));
 			booking.setDescription(request.getParameter("description"));
-			booking.setOccuDate(request.getParameter("occuDate"));
+			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
+			booking.setOccuDate(sdf.parse(request.getParameter("occuDate")));
 			booking.setGuestId(Long.valueOf(request.getParameter("guestId")));
 			booking.setRoomId(Long.valueOf(request.getParameter("roomId")));
 			BookingService service = new BookingServiceImpl();
