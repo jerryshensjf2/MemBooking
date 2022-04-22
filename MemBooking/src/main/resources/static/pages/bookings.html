@@ -69,7 +69,7 @@
 <th data-options="field:'guestId',width:80,formatter:translateGuest">Guest</th>
 
 <th data-options="field:'roomId',width:80,formatter:translateRoom">Room</th>
-<th data-options="field:'occuDate',width:80">Occupy Date</th>
+<th data-options="field:'occuDate',width:80,formatter:formatDate2">Occupy Date</th>
 <th data-options="field:'description',width:80">description</th>
 </tr>
 </thead>
@@ -89,7 +89,7 @@
 
 
 <tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-<tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
+<tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
 
 
 
@@ -120,7 +120,7 @@
 
 
 <tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-<tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
+<tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
 
 
 
@@ -135,7 +135,7 @@
 <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#wupdateBooking').window('close')">Cancel</a>
 </div>
 </div>
-<div class="easyui-window" title="查看Booking" id="wviewBooking" data-options="iconCls:'icon-save',modal:true,closed:true" style="width:800px;height:600px">
+<div class="easyui-window" title="View Booking" id="wviewBooking" data-options="iconCls:'icon-save',modal:true,closed:true" style="width:800px;height:600px">
 <div style="padding:10px 60px 20px 60px">
 <form id="ffview" method="post">
 <input  type='hidden' name='id' id='id' value=''/>
@@ -151,7 +151,7 @@
 
 
 <tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-<tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
+<tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
 
 
 
@@ -172,7 +172,7 @@ var pagesize = 10;
 var pagenum = 1;
 var toolbar = [
 {
-	text:'Ｖiew',
+	text:'View',
 	iconCls:'icon-search',
 	handler:function(){ 
 		var rows = $("#dg").datagrid("getChecked");
@@ -188,7 +188,7 @@ var toolbar = [
 		$("#ffview").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
 		$("#ffview").find("#guestId").combobox("setValue",rows[0]["guestId"]);
 		$("#ffview").find("#roomId").combobox("setValue",rows[0]["roomId"]);
-		$("#ffview").find("#occuDate").textbox("setValue",rows[0]["occuDate"]);
+		$("#ffview").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
 		$("#ffview").find("#description").val(rows[0]["description"]);
 		var checkboxs = $("#ffview").find("input[name='active']");
 		for (var i=0;i<checkboxs.length;i++){
@@ -223,7 +223,9 @@ var toolbar = [
 		$("#ffedit").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
 		$("#ffedit").find("#guestId").combobox("setValue",rows[0]["guestId"]);
 		$("#ffedit").find("#roomId").combobox("setValue",rows[0]["roomId"]);
-		$("#ffedit").find("#occuDate").textbox("setValue",rows[0]["occuDate"]);
+		alert(rows[0]["occuDate"]["time"]);
+		alert(formatDate(rows[0]["occuDate"]["time"]));
+		$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
 		$("#ffedit").find("#description").val(rows[0]["description"]);
 		var checkboxs = $("#ffedit").find("input[name='active']");
 		for (var i=0;i<checkboxs.length;i++){
@@ -641,6 +643,35 @@ function translateRoom(value){
 		}
 	});
 	return retVal;
+}
+
+function formatDate(time) {
+	const d = new Date(time)
+	const resDate = d.getFullYear() + '-' + p((d.getMonth() + 1)) + '-' + p(d.getDate())	
+	return resDate;
+}
+
+function p(s) {
+	return s < 10 ? '0' + s : s
+}
+
+function formatDate2(time) {
+	const d = new Date(time.time)
+	const resDate = d.getFullYear() + '-' + p((d.getMonth() + 1)) + '-' + p(d.getDate())	
+	return resDate;
+}
+
+function parseDate(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
 }
 
 </script>
