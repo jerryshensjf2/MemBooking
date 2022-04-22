@@ -3,6 +3,7 @@ package com.javaforever.membooking.dao;
 import java.util.List;
 
 import com.javaforever.membooking.domain.Booking;
+import com.javaforever.membooking.exception.ValidateException;
 
 public interface BookingDao{
 	public List<Booking> listAllBookings() throws Exception;
@@ -25,4 +26,5 @@ public interface BookingDao{
 	public Long countActiveBookingRecords() throws Exception;
 	public Long countAllBookingRecords() throws Exception;
 	public Long countSearchBookingsByFieldsRecords(Booking booking) throws Exception;
+	public boolean validate(Booking booking) throws ValidateException;
 }

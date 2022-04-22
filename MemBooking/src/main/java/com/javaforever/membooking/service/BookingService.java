@@ -1,6 +1,8 @@
 package com.javaforever.membooking.service;
 
 import com.javaforever.membooking.domain.Booking;
+import com.javaforever.membooking.exception.ValidateException;
+
 import java.util.List;
 
 public interface BookingService{
@@ -25,4 +27,5 @@ public interface BookingService{
 	public Long countActiveBookingRecords() throws Exception;
 	public Long countAllBookingRecords() throws Exception;
 	public Long countSearchBookingsByFieldsRecords(Booking booking) throws Exception;
+	public boolean validate(Booking booking) throws ValidateException;
 }

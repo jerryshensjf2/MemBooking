@@ -2,11 +2,10 @@ package com.javaforever.membooking.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.domain.Booking;
-import com.javaforever.membooking.domain.Guest;
+import com.javaforever.membooking.exception.ValidateException;
 
 public class BookingDaoImpl implements BookingDao{
 	public static List<Booking> db = new ArrayList<>();
@@ -149,6 +148,21 @@ public class BookingDaoImpl implements BookingDao{
 			if (b.getId()>index) index = b.getId();
 		}
 		return index +1L;
+	}
+	
+	
+	public boolean validate(Booking booking) throws ValidateException{
+		for (Booking b:db) {
+			if (!b.getOccuDate().equals(booking.getOccuDate())) continue;
+			else {
+				if (b.getGuestId()==booking.getGuestId()) {
+					throw new ValidateException("Customer had booked a room this day.");
+				}else if (b.getRoomId()==booking.getRoomId()) {
+					throw new ValidateException("Room had been booked this day.");
+				}
+			}
+		}
+		return true;
 	}
 
 }

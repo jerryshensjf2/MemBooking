@@ -5,6 +5,7 @@ import java.util.List;
 import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.daoimpl.BookingDaoImpl;
 import com.javaforever.membooking.domain.Booking;
+import com.javaforever.membooking.exception.ValidateException;
 import com.javaforever.membooking.service.BookingService;
 
 public class BookingServiceImpl implements BookingService{
@@ -104,6 +105,11 @@ public class BookingServiceImpl implements BookingService{
 
 	public boolean updateBooking(Booking booking) throws Exception{		
 			return dao.updateBooking(booking);
+	}
+
+	@Override
+	public boolean validate(Booking booking) throws ValidateException {
+		return dao.validate(booking);
 	}
 
 }

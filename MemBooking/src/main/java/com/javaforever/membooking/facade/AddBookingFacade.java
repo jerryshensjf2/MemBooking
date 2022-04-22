@@ -42,6 +42,7 @@ public class AddBookingFacade extends HttpServlet{
 			booking.setGuestId(Long.valueOf(request.getParameter("guestId")));
 			booking.setRoomId(Long.valueOf(request.getParameter("roomId")));
 			BookingService service = new BookingServiceImpl();
+			boolean validate = service.validate(booking);
 			boolean success = service.addBooking(booking);
 			result.put("success",success);
 			result.put("data",booking);
