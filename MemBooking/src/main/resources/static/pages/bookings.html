@@ -44,7 +44,7 @@
 <td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:false"/></td>
 <td>Active:</td><td><input class='easyui-textbox' type='text' name='active' id='active' value='' data-options="required:false"/></td>
 
-<td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../guestFacade/listActiveGuests',loadFilter:function(data){return data.rows}"/></td>
+<td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../fFacade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td>
 <td>
 		</td><td>
 		<div id="button-bar">
@@ -89,11 +89,11 @@
 
 
 
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../guestFacade/listActiveGuests',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 
 
 
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../roomFacade/listActiveRooms',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
 
 
@@ -120,11 +120,11 @@
 
 
 
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../guestFacade/listActiveGuests',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 
 
 
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../roomFacade/listActiveRooms',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
 
 
@@ -151,11 +151,11 @@
 
 
 
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../guestFacade/listActiveGuests',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 
 
 
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../roomFacade/listActiveRooms',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>Occupy Date:</td><td><input  class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td></tr>
 
 
@@ -595,7 +595,7 @@ function translateGuest(value){
 	var retVal = value;
 	$.ajax({
 		type:"post",
-		url: "../guestFacade/findGuestById",
+		url: "../facade/findGuestByIdFacade",
 		data: {
 			id:value
 		},
@@ -624,7 +624,7 @@ function translateRoom(value){
 	var retVal = value;
 	$.ajax({
 		type:"post",
-		url: "../roomFacade/findRoomById",
+		url: "../facade/findRoomByIdFacade",
 		data: {
 			id:value
 		},

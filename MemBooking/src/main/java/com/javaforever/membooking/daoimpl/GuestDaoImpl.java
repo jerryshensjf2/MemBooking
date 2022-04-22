@@ -96,15 +96,15 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public List<Guest> listActiveGuests() throws Exception{
-		return null;
+		return db;
 	}
 
 	public List<Guest> listAllGuests() throws Exception{
-		return null;
+		return db;
 	}
 
 	public List<Guest> listAllGuestsByPage(int pagesize,int pagenum) throws Exception{
-		return null;
+		return db;
 	}
 
 	public List<Guest> searchGuestsByFieldsByPage(Guest guest,Long pagenum,Long pagesize) throws Exception{

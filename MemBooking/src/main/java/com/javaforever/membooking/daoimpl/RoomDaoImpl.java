@@ -31,8 +31,7 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public List<Room> listAllRooms() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override
@@ -86,8 +85,7 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public List<Room> listActiveRooms() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override

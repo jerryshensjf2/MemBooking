@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.javaforever.membooking.dao.BookingDao;
 import com.javaforever.membooking.domain.Booking;
+import com.javaforever.membooking.domain.Guest;
 
 public class BookingDaoImpl implements BookingDao{
 	public static List<Booking> db = new ArrayList<>();
@@ -49,14 +50,21 @@ public class BookingDaoImpl implements BookingDao{
 
 	@Override
 	public boolean deleteBooking(Long id) throws Exception {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==id){
+                db.remove(i);
+                return true;
+            }
+        }
 		return false;
 	}
 
 	@Override
 	public boolean addBooking(Booking booking) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		Long index = nextIndex();
+		booking.setId(index);
+		db.add(booking);
+		return true;
 	}
 
 	@Override
@@ -103,8 +111,7 @@ public class BookingDaoImpl implements BookingDao{
 
 	@Override
 	public List<Booking> searchBookingsByFieldsByPage(Booking booking, Long pagenum, Long pagesize) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override
@@ -133,8 +140,15 @@ public class BookingDaoImpl implements BookingDao{
 
 	@Override
 	public Long countSearchBookingsByFieldsRecords(Booking booking) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return Long.valueOf(db.size());
+	}
+	
+	private Long nextIndex(){
+		Long index = 0L;
+		for (Booking b:db){
+			if (b.getId()>index) index = b.getId();
+		}
+		return index +1L;
 	}
 
 }
