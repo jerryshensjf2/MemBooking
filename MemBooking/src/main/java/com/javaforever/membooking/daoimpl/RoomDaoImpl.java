@@ -67,7 +67,9 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public Room findRoomById(Long id) throws Exception {
-		// TODO Auto-generated method stub
+		for (Room r:db) {
+			if (r.getId() == id) return r;
+		}
 		return null;
 	}
 

@@ -9,19 +9,14 @@
 <title>Booking</title>
 <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="../easyui/demo/demo.css">
 <script type="text/javascript" src="../easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../uploadjs/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="../uploadjs/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../uploadjs/jquery.fileupload.js"></script>
-<script type="text/javascript" src="../js/auth.js"></script>
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" style="height:100px;background:#B3DFDA;padding:10px">
-<div style="float:right;clear:both;margin-top:15px;margin-right:20px">
-	<a href="javascript:logout()">Logout</a>
-	</div>
 	<h2>MemBooking Backend</h2>
 	<h3>Serving public from 2022</h3>
 </div>
@@ -44,7 +39,7 @@
 <td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:false"/></td>
 <td>Active:</td><td><input class='easyui-textbox' type='text' name='active' id='active' value='' data-options="required:false"/></td>
 
-<td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../fFacade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td>
+<td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td>
 <td>
 		</td><td>
 		<div id="button-bar">
@@ -56,7 +51,7 @@
 </tr>
 <tr>
 
-<td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../roomFacade/listActiveRooms',loadFilter:function(data){return data.rows}"/></td>
+<td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td>
 <td>Occupy Date:</td><td><input class='easyui-textbox' type='text' name='occuDate' id='occuDate' value='' data-options="required:false"/></td>
 <td>description:</td><td><input class='easyui-textbox' type='text' name='description' id='description' value='' data-options="required:false"/></td>
 <td></td><td colspan='3'></td>
@@ -365,16 +360,14 @@ function addBooking(){
 		$.ajax({
 			type: "post",
 			url: "../facade/addBookingFacade",
-			data: JSON.stringify({
+			data: {
 				bookingName:$("#ff").find("#bookingName").val(),
 				active:parseBoolean($("#ff").find("input[name='active']:checked").val()),
 				guestId:$("#ff").find("#guestId").combobox("getValue"),
 				roomId:$("#ff").find("#roomId").combobox("getValue"),
 				occuDate:$("#ff").find("#occuDate").val(),
 				description:$("#ff").find("#description").val(),
-			}),
-			dataType: 'json',
-			contentType:"application/json;charset=UTF-8",
+			},
 			success: function(data, textStatus) {
 				if (data.success) {
 					window.location.reload();

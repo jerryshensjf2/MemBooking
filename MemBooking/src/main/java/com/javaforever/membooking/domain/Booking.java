@@ -3,6 +3,7 @@ package com.javaforever.membooking.domain;
 
 public class Booking  {
 	protected Long roomId;
+	protected Long guestId;
 	protected String occuDate;
 	protected String description;
 	protected String bookingName;
@@ -55,6 +56,14 @@ public class Booking  {
 
 	public void setRoomId(Long roomId){
 		this.roomId = roomId;
+	}
+
+	public Long getGuestId() {
+		return guestId;
+	}
+
+	public void setGuestId(Long guestId) {
+		this.guestId = guestId;
 	}
 
 }
