@@ -129,14 +129,12 @@ public class BookingDaoImpl implements BookingDao{
 
 	@Override
 	public List<Booking> listActiveBookings() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override
 	public List<Booking> listAllBookingsByPage(int pagesize, int pagenum) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return db;
 	}
 
 	@Override

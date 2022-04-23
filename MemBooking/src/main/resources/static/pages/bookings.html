@@ -9,7 +9,7 @@
 <title>Booking</title>
 <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
-<script type="text/javascript" src="../easyui/jquery.min.js"></script>
+<script type="text/javascript" src="..//MemBooking/src/main/resources/static/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../uploadjs/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="../uploadjs/jquery.iframe-transport.js"></script>
@@ -65,9 +65,7 @@
 <th data-options="field:'id',checkbox:true">ID</th>
 <th data-options="field:'bookingName',width:80">bookingName</th>
 <th data-options="field:'active',width:80">Active</th>
-
 <th data-options="field:'guestId',width:80,formatter:translateGuest">Guest</th>
-
 <th data-options="field:'roomId',width:80,formatter:translateRoom">Room</th>
 <th data-options="field:'occuDate',width:80,formatter:formatDate2">Occupy Date</th>
 <th data-options="field:'description',width:80">description</th>
@@ -78,23 +76,11 @@
 <div style="padding:10px 60px 20px 60px">
 <form id="ff" method="post">
 <table cellpadding="5">
-<tr><td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:false"/></td></tr>
-
-
-
-
-
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-
-
-
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:true"/></td></tr>
 <tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
-
-
-
+<tr><td>Guest:</td><td><input class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:true,valueField:'id',textField:'guestName',method:'post',url:'../facade/listAvailableGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:true,valueField:'id',textField:'roomName',method:'post',url:'../facade/listAvailableRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>description:</td><td><textarea  class='easyui-textarea' type='text' name='description' id='description' data-options="required:false" cols='20' rows='4'></textarea></td></tr>
-
 <tr><td>Active:</td><td><input class='easyui-radio' type='radio' name='active' id='active' value='true' checked='true'/>True<input type='radio' class='easyui-radio' name='active' id='active' value='false'/>False</td></tr>
 </table>
 </form>
@@ -110,22 +96,10 @@
 <input  type='hidden' name='id' id='id' value=''/>
 <table cellpadding="5">
 <tr><td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:false"/></td></tr>
-
-
-
-
-
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-
-
-
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
-
-
-
+<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listAvailableGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listAvailableRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>description:</td><td><textarea  class='easyui-textarea' type='text' name='description' id='description' data-options="required:false" cols='20' rows='4'></textarea></td></tr>
-
 <tr><td>Active:</td><td><input class='easyui-radio' type='radio' name='active' id='active' value='true' checked='true'/>True<input type='radio' class='easyui-radio' name='active' id='active' value='false'/>False</td></tr>
 </table>
 </form>
@@ -141,22 +115,10 @@
 <input  type='hidden' name='id' id='id' value=''/>
 <table cellpadding="5">
 <tr><td>bookingName:</td><td><input  class='easyui-textbox' type='text' name='bookingName' id='bookingName' value='' data-options="required:false"/></td></tr>
-
-
-
-
-
-<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
-
-
-
-<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>Occupy Date:</td><td><input id="occuDate" name="occuDate"  style="width: 200px;" class="easyui-datebox" data-options="required:true,formatter:formatDate,parser:parseDate" /></td></tr>
-
-
-
+<tr><td>Guest:</td><td><input  class='easyui-combobox' type='text' name='guestId' id='guestId' value='' data-options="required:false,valueField:'id',textField:'guestName',method:'post',url:'../facade/listActiveGuestsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
+<tr><td>Room:</td><td><input  class='easyui-combobox' type='text' name='roomId' id='roomId' value='' data-options="required:false,valueField:'id',textField:'roomName',method:'post',url:'../facade/listActiveRoomsFacade',loadFilter:function(data){return data.rows}"/></td></tr>
 <tr><td>description:</td><td><textarea  class='easyui-textarea' type='text' name='description' id='description' data-options="required:false" cols='20' rows='4'></textarea></td></tr>
-
 <tr><td>Active:</td><td><input class='easyui-radio' type='radio' name='active' id='active' value='true' checked='true'/>True<input type='radio' class='easyui-radio' name='active' id='active' value='false'/>False</td></tr>
 </table>
 </form>
@@ -168,6 +130,8 @@
 </body>
 <script type="text/javascript">
 var params = {};
+var dataParam = {};
+var dateParam = {};
 var pagesize = 10;
 var pagenum = 1;
 var toolbar = [
@@ -219,11 +183,13 @@ var toolbar = [
 			$.messager.alert("Alert","Please choose one record!","warning");
 			return;
 		}
+		$.parser.parse($("#ffedit"));
 		$("#ffedit").find("#id").val(rows[0]["id"]);
 		$("#ffedit").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
+		//$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
+		
 		$("#ffedit").find("#guestId").combobox("setValue",rows[0]["guestId"]);
 		$("#ffedit").find("#roomId").combobox("setValue",rows[0]["roomId"]);
-		$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
 		$("#ffedit").find("#description").val(rows[0]["description"]);
 		var checkboxs = $("#ffedit").find("input[name='active']");
 		for (var i=0;i<checkboxs.length;i++){
@@ -279,6 +245,50 @@ var toolbar = [
 ];
 $(document).ready(function(){
 $("#dg").datagrid("load");
+
+$('#ff').find("#occuDate").datebox({
+	onSelect: function(date){
+		var fdate = formatDate(date);
+		selectDate(fdate);
+	}
+});
+
+$('#ffedit').find("#occuDate").datebox({
+	onSelect: function(date){
+		var fdate = formatDate(date);
+		selectDateEdit(fdate);
+	}
+});
+
+function selectDate(date){	
+	$('#ff').find("#guestId").combobox({
+        url: "../facade/listAvailableGuestsFacade?occuDate=" + date,
+        valueField: 'id',
+        textField: 'guestName',
+        loadFilter:function(data){return data.rows}
+    });
+	$('#ff').find("#roomId").combobox({
+        url: "../facade/listAvailableRoomsFacade?occuDate=" + date,
+        valueField: 'id',
+        textField: 'roomName',
+        loadFilter:function(data){return data.rows}
+    });
+}
+
+function selectDateEdit(date){	
+	$('#ffedit').find("#guestId").combobox({
+        url: "../facade/listAvailableGuestsFacade?occuDate=" + date,
+        valueField: 'id',
+        textField: 'guestName',
+        loadFilter:function(data){return data.rows}
+    });
+	$('#ffedit').find("#roomId").combobox({
+        url: "../facade/listAvailableRoomsFacade?occuDate=" + date,
+        valueField: 'id',
+        textField: 'roomName',
+        loadFilter:function(data){return data.rows}
+    });
+}
 });
 function clearForm(formId){
 $('#'+formId).form('clear');
@@ -576,6 +586,9 @@ function translateRoom(value){
 function formatDate(time) {
 	const d = new Date(time)
 	const resDate = d.getFullYear() + '-' + p((d.getMonth() + 1)) + '-' + p(d.getDate())	
+	dateParam = {
+		occuDate:resDate,
+	};
 	return resDate;
 }
 
@@ -601,6 +614,5 @@ function parseDate(s){
         return new Date();
     }
 }
-
 </script>
 </html>
