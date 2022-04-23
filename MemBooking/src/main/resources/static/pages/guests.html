@@ -142,7 +142,7 @@ var pagesize = 10;
 var pagenum = 1;
 var toolbar = [
 {
-	text:'Ｖiew',
+	text:'View',
 	iconCls:'icon-search',
 	handler:function(){ 
 		var rows = $("#dg").datagrid("getChecked");
@@ -200,42 +200,6 @@ var toolbar = [
 }
 ,
 {
-	text:'Soft Delete',
-	iconCls:'icon-remove',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		if (rows.length > 1) {
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		var id = rows[0]["id"];
-		softDeleteGuest(id);
-	}
-}
-,
-{
-	text:'Activate',
-	iconCls:'icon-tip',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		if (rows.length > 1) {
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		var id = rows[0]["id"];
-		activateGuest(id);
-	}
-}
-,
-{
 	text:'Delete',
 	iconCls:'icon-remove',
 	handler:function(){
@@ -255,42 +219,6 @@ var toolbar = [
 			}
 		}));
 }
-}
-,
-{
-	text:'Soft Delete All',
-	iconCls:'icon-remove',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose record!","warning");
-			return;
-		}
-		var ids = "";
-		for(var i=0;i<rows.length;i++){
-			ids += rows[i]["id"];
-			if (i < rows.length-1) ids += ",";
-		}
-		softDeleteAllGuests(ids);
-	}
-}
-,
-{
-	text:'ActivateAll',
-	iconCls:'icon-tip',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose record!","warning");
-			return;
-		}
-		var ids = "";
-		for(var i=0;i<rows.length;i++){
-			ids += rows[i]["id"];
-			if (i < rows.length-1) ids += ",";
-		}
-		activateAllGuests(ids);
-	}
 }
 ,
 {
@@ -354,15 +282,13 @@ function updateGuest(){
 	$.ajax({
 		type: "post",
 		url: "../facade/updateGuestFacade",
-		data: JSON.stringify({
+		data: {
 			id:$("#ffedit").find("#id").val(),
 			guestName:$("#ffedit").find("#guestName").val(),
 			active:parseBoolean($("#ffedit").find("input[name='active']:checked").val()),
 			gender:$("#ffedit").find("#gender").val(),
 			description:$("#ffedit").find("#description").val(),
-		}),
-		dataType: 'json',
-		contentType:"application/json;charset=UTF-8",
+		},
 		success: function(data, textStatus) {
 			if (data.success){
 				$("#wupdateGuest").window('close');

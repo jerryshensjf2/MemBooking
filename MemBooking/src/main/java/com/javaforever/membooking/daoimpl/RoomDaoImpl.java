@@ -60,7 +60,14 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public boolean updateRoom(Room room) throws Exception {
-		// TODO Auto-generated method stub
+		if (room.getId() ==null) return false;
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==room.getId()){
+                db.remove(i);
+                db.add(i, room);
+                return true;
+            }
+        }
 		return false;
 	}
 

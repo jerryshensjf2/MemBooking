@@ -156,6 +156,14 @@ public class GuestDaoImpl implements GuestDao{
 	}
 
 	public boolean updateGuest(Guest guest) throws Exception{
+		if (guest.getId() ==null) return false;
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==guest.getId()){
+                db.remove(i);
+                db.add(i, guest);
+                return true;
+            }
+        }
 		return false;
 	}
 

@@ -234,42 +234,6 @@ var toolbar = [
 }
 ,
 {
-	text:'Soft Delete',
-	iconCls:'icon-remove',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		if (rows.length > 1) {
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		var id = rows[0]["id"];
-		softDeleteBooking(id);
-	}
-}
-,
-{
-	text:'Activate',
-	iconCls:'icon-tip',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		if (rows.length > 1) {
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		var id = rows[0]["id"];
-		activateBooking(id);
-	}
-}
-,
-{
 	text:'Delete',
 	iconCls:'icon-remove',
 	handler:function(){
@@ -289,42 +253,6 @@ var toolbar = [
 			}
 		}));
 }
-}
-,
-{
-	text:'Soft Delete All',
-	iconCls:'icon-remove',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose record!","warning");
-			return;
-		}
-		var ids = "";
-		for(var i=0;i<rows.length;i++){
-			ids += rows[i]["id"];
-			if (i < rows.length-1) ids += ",";
-		}
-		softDeleteAllBookings(ids);
-	}
-}
-,
-{
-	text:'ActivateAll',
-	iconCls:'icon-tip',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose record!","warning");
-			return;
-		}
-		var ids = "";
-		for(var i=0;i<rows.length;i++){
-			ids += rows[i]["id"];
-			if (i < rows.length-1) ids += ",";
-		}
-		activateAllBookings(ids);
-	}
 }
 ,
 {
