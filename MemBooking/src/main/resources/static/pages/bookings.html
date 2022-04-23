@@ -9,7 +9,7 @@
 <title>Booking</title>
 <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
-<script type="text/javascript" src="..//MemBooking/src/main/resources/static/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../uploadjs/vendor/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="../uploadjs/jquery.iframe-transport.js"></script>
@@ -170,35 +170,35 @@ var toolbar = [
 	}
 }
 ,
-{
-	text:'Update',
-	iconCls:'icon-edit',
-	handler:function(){ 
-		var rows = $("#dg").datagrid("getChecked");
-		if (rows == undefined || rows == null || rows.length == 0 ){
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		if (rows.length > 1) {
-			$.messager.alert("Alert","Please choose one record!","warning");
-			return;
-		}
-		$.parser.parse($("#ffedit"));
-		$("#ffedit").find("#id").val(rows[0]["id"]);
-		$("#ffedit").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
-		//$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
+// {
+// 	text:'Update',
+// 	iconCls:'icon-edit',
+// 	handler:function(){ 
+// 		var rows = $("#dg").datagrid("getChecked");
+// 		if (rows == undefined || rows == null || rows.length == 0 ){
+// 			$.messager.alert("Alert","Please choose one record!","warning");
+// 			return;
+// 		}
+// 		if (rows.length > 1) {
+// 			$.messager.alert("Alert","Please choose one record!","warning");
+// 			return;
+// 		}
+
+// 		$("#ffedit").find("#id").val(rows[0]["id"]);
+// 		$("#ffedit").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
+// 		$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
 		
-		$("#ffedit").find("#guestId").combobox("setValue",rows[0]["guestId"]);
-		$("#ffedit").find("#roomId").combobox("setValue",rows[0]["roomId"]);
-		$("#ffedit").find("#description").val(rows[0]["description"]);
-		var checkboxs = $("#ffedit").find("input[name='active']");
-		for (var i=0;i<checkboxs.length;i++){
-			if (checkboxs.get(i).value == ""+rows[0]["active"]) checkboxs.get(i).checked=true;
-		}
-		$('#wupdateBooking').window('open');
-	}
-}
-,
+// 		$("#ffedit").find("#guestId").combobox("setValue",rows[0]["guestId"]);
+// 		$("#ffedit").find("#roomId").combobox("setValue",rows[0]["roomId"]);
+// 		$("#ffedit").find("#description").val(rows[0]["description"]);
+// 		var checkboxs = $("#ffedit").find("input[name='active']");
+// 		for (var i=0;i<checkboxs.length;i++){
+// 			if (checkboxs.get(i).value == ""+rows[0]["active"]) checkboxs.get(i).checked=true;
+// 		}
+// 		$('#wupdateBooking').window('open');
+// 	}
+// }
+// ,
 {
 	text:'Delete',
 	iconCls:'icon-remove',
