@@ -1,6 +1,8 @@
 package com.javaforever.membooking.daoimpl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.javaforever.membooking.dao.BookingDao;
@@ -9,6 +11,34 @@ import com.javaforever.membooking.exception.ValidateException;
 
 public class BookingDaoImpl implements BookingDao{
 	public static List<Booking> db = new ArrayList<>();
+	
+	static {
+		try{
+			Booking booking0 = new Booking();
+			booking0.setId(1L);
+			booking0.setGuestId(1L);
+			booking0.setRoomId(1L);
+			booking0.setBookingName("Jerry booking");
+			booking0.setDescription("");
+			booking0.setActive(true);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			booking0.setOccuDate(sdf.parse("2022-4-23"));
+			
+			Booking booking1 = new Booking();
+			booking1.setId(2L);
+			booking1.setGuestId(2L);
+			booking1.setRoomId(2L);
+			booking1.setBookingName("Mala booking");
+			booking1.setDescription("");
+			booking1.setActive(true);
+			booking1.setOccuDate(sdf.parse("2022-4-23"));
+			
+			db.add(booking0);
+			db.add(booking1);
+		} catch (Exception e) {
+			
+		}
+	}
 	
 	public void activateAllBookings(String ids) throws Exception{
 		String [] idArr = ids.split(",");
@@ -43,7 +73,14 @@ public class BookingDaoImpl implements BookingDao{
 
 	@Override
 	public boolean updateBooking(Booking booking) throws Exception {
-		// TODO Auto-generated method stub
+		if (booking.getId() ==null) return false;
+		for (int i = 0; i < db.size(); i++) {
+            if(db.get(i).getId()==booking.getId()){
+                db.remove(i);
+                db.add(i, booking);
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -153,10 +190,10 @@ public class BookingDaoImpl implements BookingDao{
 	
 	public boolean validate(Booking booking) throws ValidateException{
 		for (Booking b:db) {
-			if (!b.getOccuDate().equals(booking.getOccuDate())) continue;
+			if ((booking.getId()!=null && b.getId()==booking.getId())||!b.getOccuDate().equals(booking.getOccuDate())) continue;
 			else {
 				if (b.getGuestId()==booking.getGuestId()) {
-					throw new ValidateException("Customer had booked a room this day.");
+					throw new ValidateException("Guest had booked a room this day.");
 				}else if (b.getRoomId()==booking.getRoomId()) {
 					throw new ValidateException("Room had been booked this day.");
 				}

@@ -12,20 +12,36 @@ public class GuestDaoImpl implements GuestDao{
 	static {
 		Guest guest0 = new Guest();
 		guest0.setId(1L);
-		guest0.setGuestName("jerry");
+		guest0.setGuestName("Jerry");
 		guest0.setGender("Male");
 		guest0.setActive(true);
 		guest0.setDescription("");
 		
 		Guest guest1 = new Guest();
 		guest1.setId(2L);
-		guest1.setGuestName("mala");
+		guest1.setGuestName("Mala");
 		guest1.setGender("Female");
 		guest1.setActive(true);
 		guest1.setDescription("");
 		
+		Guest guest2 = new Guest();
+		guest2.setId(3L);
+		guest2.setGuestName("Linda");
+		guest2.setGender("Female");
+		guest2.setActive(true);
+		guest2.setDescription("");
+		
+		Guest guest3 = new Guest();
+		guest3.setId(4L);
+		guest3.setGuestName("Peter");
+		guest3.setGender("Male");
+		guest3.setActive(true);
+		guest3.setDescription("");
+		
 		db.add(guest0);
 		db.add(guest1);
+		db.add(guest2);
+		db.add(guest3);
 	}
 	
 	public void activateAllGuests(String ids) throws Exception{

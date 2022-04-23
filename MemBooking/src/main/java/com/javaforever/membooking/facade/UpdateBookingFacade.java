@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
+@WebServlet(name = "updateBookingFacade",urlPatterns = "/facade/updateBookingFacade")
 public class UpdateBookingFacade extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
@@ -35,6 +37,7 @@ public class UpdateBookingFacade extends HttpServlet{
 		try {
 			Booking booking = new Booking();
 			booking.setRoomId(Long.valueOf(request.getParameter("roomId")));
+			booking.setGuestId(Long.valueOf(request.getParameter("guestId")));
 			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
 			booking.setOccuDate(sdf.parse(request.getParameter("occuDate")));
 			booking.setDescription(request.getParameter("description"));
@@ -42,6 +45,7 @@ public class UpdateBookingFacade extends HttpServlet{
 			booking.setActive(Boolean.parseBoolean(request.getParameter("active")));
 			booking.setId(Long.parseLong(request.getParameter("id")));
 			BookingService service = new BookingServiceImpl();
+			boolean validate = service.validate(booking);
 			boolean success = service.updateBooking(booking);
 			result.put("success",success);
 			result.put("data",null);

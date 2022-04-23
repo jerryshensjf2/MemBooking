@@ -24,9 +24,33 @@ public class RoomDaoImpl implements RoomDao{
 		room1.setRoomName("London");
 		room1.setActive(true);
 		room1.setDescription("");
+		
+		Room room2 = new Room();
+		room2.setId(3L);
+		room2.setRoomNo("3");
+		room2.setRoomName("Roma");
+		room2.setActive(true);
+		room2.setDescription("");
+		
+		Room room3 = new Room();
+		room3.setId(4L);
+		room3.setRoomNo("4");
+		room3.setRoomName("Washington");
+		room3.setActive(true);
+		room3.setDescription("");
+		
+		Room room4 = new Room();
+		room4.setId(5L);
+		room4.setRoomNo("5");
+		room4.setRoomName("Paris");
+		room4.setActive(true);
+		room4.setDescription("");
 	
 		db.add(room0);
 		db.add(room1);
+		db.add(room2);
+		db.add(room3);
+		db.add(room4);
 	}
 
 	@Override

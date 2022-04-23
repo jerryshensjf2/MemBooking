@@ -223,8 +223,6 @@ var toolbar = [
 		$("#ffedit").find("#bookingName").textbox("setValue",rows[0]["bookingName"]);
 		$("#ffedit").find("#guestId").combobox("setValue",rows[0]["guestId"]);
 		$("#ffedit").find("#roomId").combobox("setValue",rows[0]["roomId"]);
-		alert(rows[0]["occuDate"]["time"]);
-		alert(formatDate(rows[0]["occuDate"]["time"]));
 		$("#ffedit").find("#occuDate").datebox("setValue",formatDate(rows[0]["occuDate"]["time"]));
 		$("#ffedit").find("#description").val(rows[0]["description"]);
 		var checkboxs = $("#ffedit").find("input[name='active']");
@@ -391,7 +389,7 @@ function updateBooking(){
 	$.ajax({
 		type: "post",
 		url: "../facade/updateBookingFacade",
-		data: JSON.stringify({
+		data: {
 			id:$("#ffedit").find("#id").val(),
 			bookingName:$("#ffedit").find("#bookingName").val(),
 			active:parseBoolean($("#ffedit").find("input[name='active']:checked").val()),
@@ -399,13 +397,15 @@ function updateBooking(){
 			roomId:$("#ffedit").find("#roomId").combobox("getValue"),
 			occuDate:$("#ffedit").find("#occuDate").val(),
 			description:$("#ffedit").find("#description").val(),
-		}),
-		dataType: 'json',
-		contentType:"application/json;charset=UTF-8",
+		},
 		success: function(data, textStatus) {
 			if (data.success){
 				$("#wupdateBooking").window('close');
 				$("#dg").datagrid("load");
+			}else if (data.success==false&&!isBlank(data.reason)){
+				$.messager.alert("Error",data.reason,"error");
+			}else{
+				$.messager.alert("Error","Update fails.","error");
 			}
 		},
 		complete : function(XMLHttpRequest, textStatus) {
